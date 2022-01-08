@@ -1,34 +1,39 @@
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
-        #IDEA: identify the last ascending index, and its value k; to its right, find the first value that's larger than k,
-        #swap it with k's index. Finally, reverse elements from k+1 to end
-
-        #TIME: O(n)
-        #SPACE: O(1)
         """
         Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        i = n-1
-        # Find the last ascending index from right of the array
-        while i > 0 and nums[i-1] >= nums[i]:
+        # IDEA: 1) find the last instance of ascending (index i as the "peak position"), if no ascending at all, return reversed str
+        # 2) j = i-1. find smallest number x after j such that nums[j] < x <= nums[i]. Swap indexOf(x) and j
+        # 3) sort all nums after indexOf(x) in ascending order
+        
+        # TIME: O(n)
+        # SPACE: O(1)
+        
+        # find the last instance of ascending (from the back, the first instance of descending)
+        i = len(nums)-1
+        while i>=1:
+            if nums[i]>nums[i-1]:
+                break
             i-=1
-        # If i == 0 that means the array is in descending order and
-        # there is no other solution greater than current formation is possible
-        # Therefore, reverse the array and return
-        if i == 0:
+        if i==0:
             nums.reverse()
             return
-        # k will be the index of element just before last ascending
-        k = i - 1
-        j = n-1
-        # Starting from end find the first largest value than k
-        while nums[j] <= nums[k]:
-            j-=1
-        nums[j], nums[k] = nums[k], nums[j]
-        # Reverse the elements from k+1 till end
-        l, r = k+1, n-1
-        while l < r:
-            nums[l], nums[r] = nums[r], nums[l]
-            l+=1
-            r-=1
+        
+        j = i-1
+        # find smallest number x after j such that nums[j] < x <= nums[i]. Swap indexOf(x) and j
+        x = nums[i]
+        x_index = i
+        for m in range(j,len(nums)):
+            if nums[m] <= nums[i] and nums[m] > nums[j]:
+                x_index = m
+                x = min(x, nums[m])
+        
+        # swap x_index with j
+        nums[x_index] = nums[j]
+        nums[j] = x
+        
+        # sort all nums after x_index in ascending order
+        nums[j+1:] = sorted(nums[j+1:])
+        
+        
