@@ -1,7 +1,8 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # IDEA: use a stack, when encounter left paranthesis, push onto the stack, when encounter right, pop. If a right does not correspond to the left one, then not valid.
-
+        # IDEA: use a stack, when encounter left paranthesis, push onto the stack, 
+        # when encounter right, pop. If a right does not correspond to the left one, then not valid.
+ 
         # TIME: O(n)
         # SPACE: O(n)
         dic = {')':'(', '}':'{', ']':'['}

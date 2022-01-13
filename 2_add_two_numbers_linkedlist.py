@@ -6,7 +6,8 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         # IDEA: align the two linkedlist and use 2 pointers to traverse
-        # while creating a result linkedlist. Carry gets added to the next             # iteration
+        # while creating a result linkedlist. Carry gets added to the next             
+        # iteration
         
         # TIME: O(n)
         # SPACE: O(n)
@@ -25,7 +26,6 @@ class Solution:
                 value+=cur1.val
             if cur2!=None:
                 value+=cur2.val
-            print(value)
             
             if value>=10:
                 value -=10

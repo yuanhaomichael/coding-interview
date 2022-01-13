@@ -14,4 +14,5 @@ class Solution:
                 l+=1
                 nums[l] = nums[r]
             
-        return l+1
+        return l+1  
+        # it's l+1 because at the end, l will be at the position of the last unique element.
