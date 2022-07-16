@@ -36,6 +36,7 @@ class Solution:
                 r+=1
 
             cnt+=1
+            
         # post process by adding the rest of the k elements if either l or r goes out of bound
         if l<0 and cnt<k:
             while r<=len(array)-1 and cnt<k:

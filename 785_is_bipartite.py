@@ -13,33 +13,47 @@ class Solution:
 
         # TIME: O(N+E)
         # SPACE: O(N)
-        red_nodes = set()
-        black_nodes = set()
         
-        for i in range (len(graph)):
-            if i not in red_nodes or i not in black_nodes:
-                queue = deque([i])
+       # use a hashmap to mark colors of nodes. 0 as unexplored, -1, or 1
+        colors = {}
+        res = True
+        # mark everything as unexplored
+        for i in range(len(graph)):
+            colors[i] = 0
         
-                while queue:
-                    node = queue.popleft()
-                    if node in red_nodes:
-                        red_node = True
-                    else:
-                        red_node = False
-
-                    for n in graph[node]:
-                        if n in red_nodes and red_node:
-                            return False
-
-                        if n in black_nodes and not red_node:
-                            return False
-
-                        if n not in black_nodes and n not in red_nodes:
-                            if red_node:
-                                black_nodes.add(n)
-                            else:
-                                red_nodes.add(n)
-
-                            queue.append(n)
-                    
+        # for every node: do BFS, color the neighbors, and check conditions
+        for i in range(len(graph)):
+            res = self.bfs(graph, i, colors)
+            if res == False:
+                return res
+        
         return True
+    
+    # helper to conduct BFS and check conditions
+    def bfs(self, graph, start, colors) -> bool:
+        # use a q to help with BFS, color each neighbor, keep going until q is empty
+        q = [start]
+        while len(q)!=0:
+            node = q.pop(0)
+            color = 0
+            # 3 statuses of a node: 0, -1, 1
+            if colors[node] == 0: 
+                colors[node] = -1
+                color = -1
+            else: 
+                color = colors[node]
+            nei = graph[node]
+            for i in range(len(nei)):
+                item = nei[i]
+                # if color of neighbor item equals the color of current node
+                if colors[item] == color:
+                    return False
+                elif colors[item] == 0:
+                    colors[item] = -1*color
+                    q.append(item)
+                   
+                
+        
+        
+        
+        
