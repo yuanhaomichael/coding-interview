@@ -14,38 +14,25 @@ class Solution:
         
         cur1 = l1
         cur2 = l2
-        
-        carry = 0
-        res = ListNode()
+        res = ListNode(0)
         res_pt = res
-        while cur1!=None or cur2!=None:
-            value = 0
-            if carry == 1:
-                value+=1
-            if cur1!=None:
-                value+=cur1.val
-            if cur2!=None:
-                value+=cur2.val
-            
-            if value>=10:
-                value -=10
-                carry = 1
-            else: 
-                carry = 0
-             
-            res_pt.next = ListNode(value)
-            res_pt = res_pt.next
-            
-            # cur1, cur2 will eventually become none, then the loop stops
-            # must check whether cur1 or cur2 = None, otherwise None.next
-            # will occur
-            if cur1!=None:
-                cur1 = cur1.next
-            if cur2!=None:
-                cur2 = cur2.next
+        carry = 0
         
+        while cur1 or cur2:
+            cur1_val = cur1.val if cur1 else 0
+            cur2_val = cur2.val if cur2 else 0
+            
+            s = cur1_val + cur2_val + carry
+            
+            carry = 1 if s >= 10 else 0
+            
+            res_pt.next = ListNode(s % 10)
+            res_pt = res_pt.next
+            cur1 = cur1.next if cur1 else cur1
+            cur2 = cur2.next if cur2 else cur2
+
         if carry==1:
             res_pt.next = ListNode(1)
+    
         return res.next
-            
         
