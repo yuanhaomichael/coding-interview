@@ -16,7 +16,6 @@ class Solution:
         # at the same time, get current and next chars as a pair and check if it's an instance of substraction
         # if it is, minus the integer value of the first roman char twice
         while i < len(s)-1:
-            char = s[i]
             res+=r[s[i]]
             pair = s[i] + s[i+1]
             if pair in sub:

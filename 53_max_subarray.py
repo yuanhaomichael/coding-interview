@@ -14,7 +14,7 @@ class Solution:
         # SPACE: O(1)
         max1 = -math.inf
         sum1 = 0 
-        [-1, 2, -5, 3]
+        # [-1, 2, -5, 3]
         for i in range(len(nums)):
             sum1+=nums[i]
             max1 = max(sum1, max1)
@@ -25,7 +25,6 @@ class Solution:
         return max1
     
 # solution 2
-    
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         # IDEA: compute cumulative sum and store in an array.
@@ -50,8 +49,7 @@ class Solution:
         minValue = rs[0]
         maxDiff = rs[1] - rs[0]
         for i in range(1, len(rs)):
-            if rs[i] - minValue > maxDiff:
-                maxDiff = rs[i] - minValue
+            maxDiff = max(maxDiff, rs[i] - minValue)
 
             if rs[i] < minValue:
                 minValue = rs[i]

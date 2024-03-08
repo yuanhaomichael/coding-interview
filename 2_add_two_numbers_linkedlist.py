@@ -8,17 +8,17 @@ class Solution:
         # IDEA: align the two linkedlist and use 2 pointers to traverse
         # while creating a result linkedlist. Carry gets added to the next             
         # iteration
-        
+
         # TIME: O(n)
         # SPACE: O(n)
         
         cur1 = l1
         cur2 = l2
         res = ListNode(0)
-        res_pt = res
+        res_pt = res # holds result
         carry = 0
         
-        while cur1 or cur2:
+        while cur1 or cur2: # will keep running until both are none
             cur1_val = cur1.val if cur1 else 0
             cur2_val = cur2.val if cur2 else 0
             
